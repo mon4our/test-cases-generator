@@ -36,3 +36,10 @@ The tool interacts with the Llava API through a backend written in Python (Flask
 - Accepts `context` as a form field.
 - Accepts `screenshots` as a list of files.
 - Returns generated testing instructions or an error message.
+
+## [Video Demonstration](https://drive.google.com/file/d/1jfsn4BRAES2EESSmOEzpvk-1rtTP_v3a/view?usp=sharing)
+
+## Screenshots
+
+![image](https://github.com/user-attachments/assets/51203ea5-e9ba-4865-9028-f27f0c070554)
+![image](https://github.com/user-attachments/assets/5dea8d45-f8a1-48a2-9494-41300d89ecf7)
