@@ -21,7 +21,7 @@ The Testing Instructions Generator is a web-based tool designed to generate deta
 ## Prompting Strategy
 The prompting strategy used in this tool involves a carefully constructed prompt that provides the AI model with both visual and contextual information. The generated prompt sent to the Llava API includes:
 - **Context Provided by the User:** If the user has added any optional context, it is included in the prompt to provide additional background information for generating relevant test cases.
-- **Description of the Collage of Screenshots:** The tool converts multiple screenshots into a single collage image, which is sent to the AI model. The prompt specifies that the collage contains a sequence of app screenshots, and it instructs the AI to generate detailed testing instructions for this collage.
+- **Description of the Collage of Screenshots:** The tool converts multiple screenshots into a single collage image, which is sent to the AI model. This is done as sending multiple images results in the size of payload becoming too large (as images need to be encoded to base64 to send to the api), causing the request to fail. The prompt specifies that the collage contains a sequence of app screenshots, and it instructs the AI to generate detailed testing instructions for this collage.
 - **Structured Request for Testing Instructions:** The prompt requests a structured output that includes:
   - **Description:** A brief description of the test case scenario.
   - **Pre-Conditions:** Conditions that must be met before the test can be executed.
