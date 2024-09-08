@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Instructions Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        textarea, input[type="file"], button {
+            width: 100%;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Testing Instructions Generator</h1>
+        <textarea id="context" rows="4" placeholder="Enter optional context..."></textarea>
+        <label for="screenshots">Enter screenshots of the app in the order they appear:</label>
+        <input type="file" id="screenshots" multiple accept="image/*">
+        <button onclick="generateTestingInstructions()">Describe Testing Instructions</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        async function generateTestingInstructions() {
+            const context = document.getElementById('context').value;
+            const screenshotsInput = document.getElementById('screenshots');
+            const outputDiv = document.getElementById('output');
+
+            if (screenshotsInput.files.length === 0) {
+                alert('Please upload at least one screenshot.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('context', context);
+
+            for (const file of screenshotsInput.files) {
+                formData.append('screenshots', file);
+            }
+
+            outputDiv.innerHTML = 'Generating testing instructions...';
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/generate-instructions', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                outputDiv.innerHTML = '<p>' + result.response + '</p>';
+            } catch (error) {
+                outputDiv.innerHTML = 'An error occurred: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
